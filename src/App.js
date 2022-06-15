@@ -1,4 +1,4 @@
-import { Redirect, Route, Switch } from "react-router-dom";
+import { Navigate, Route, Routes } from "react-router-dom";
 import MainHeader from "./components/MainHeader";
 import ProductDetail from "./pages/ProductDetail";
 import Products from "./pages/Products";
@@ -11,24 +11,20 @@ function App() {
         <MainHeader />
       </header>
       <main>
-        <Switch>
-          {/* Redirect for redirect to other page.... */}
-          <Route path="/" exact>
-            <Redirect to="/welcome" />
+        <Routes>
+          {/* Redirect to welcome page */}
+          <Route path="/" element={<Navigate replace to="/welcome" />} />
+
+          <Route path="/welcome/*" element={<Welcome />}>
+            {/* Nested Routes.... */}
+            <Route path="new-user" element={<p>Welcome new User!</p>} />
           </Route>
 
-          <Route path="/welcome">
-            <Welcome />
-          </Route>
-          <Route path="/products" exact>
-            <Products />
-          </Route>
+          <Route path="/products" element={<Products />} />
 
           {/*  dynamic routing (/:productId).... */}
-          <Route path="/products/:productId">
-            <ProductDetail />
-          </Route>
-        </Switch>
+          <Route path="/products/:productId" element={<ProductDetail />} />
+        </Routes>
       </main>
     </div>
   );

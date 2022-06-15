@@ -1,15 +1,18 @@
 import React from "react";
-import { Route } from "react-router-dom";
+import { Link, Outlet } from "react-router-dom";
 
 const Welcome = () => {
   return (
     <section>
       <h1>Welcome Page</h1>
+      <Link to="new-user">New USer</Link>
 
       {/* Nested Routes.... */}
-      <Route path="/welcome/new-user">
-        <p>Welcome new User!</p>
-      </Route>
+      {/* <Routes>
+        <Route path="/welcome/new-user" element={<p>Welcome new User!</p>} />
+      </Routes> */}
+
+      <Outlet />
     </section>
   );
 };
